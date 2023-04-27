@@ -19,7 +19,7 @@ const Input = ({placeholder, name, type, value, handleChange}) => (
 
 const Welcome = () => {
 
-    const {connectWallet, DisconnectWallet, currentAccount, formData, sendTransaction, handleChange, isConnected} = useContext(TransactionContext);
+    const {connectWallet, currentAccount, formData, sendTransaction, handleChange, isConnected} = useContext(TransactionContext);
 
     const handleSubmit = (e) => {
         const {addressTo, amount} = formData;
@@ -33,7 +33,7 @@ const Welcome = () => {
 
         sendTransaction();
     }
-
+    
     return(
         <div className='flex w-full justify-center items-center'>
             <div className='flex mf:flex-row flex-col items-start justify-between md:p-20 py-12 px-4'>
@@ -52,14 +52,6 @@ const Welcome = () => {
                             Свържете Портфейл
                         </p>    
                     </button> )}
-                    
-                    <button
-                    className='flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]'
-                    onClick={DisconnectWallet}>
-                        <p className='text-white text-base font-semibold'>
-                            Прекъсване на връзката
-                        </p>  
-                    </button>
 
 
                     <div className='grid sm:grid-cols-2 grid-cols-2 w-full mt-10'>
@@ -129,7 +121,9 @@ const Welcome = () => {
 
             
         </div>
+        
     )
+    
 }
 
 export default Welcome

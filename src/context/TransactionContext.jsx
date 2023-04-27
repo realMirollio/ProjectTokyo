@@ -1,20 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 
-import { contractABI, contractAddress } from '../utils/constants';
-
 export const TransactionContext = React.createContext();
-
 let isConnected = true;
 const { ethereum } = window;
-
-const getEthereumContract = () => {
-    const provider = new ethers.providers.Web3Provider(ethereum);
-    const signer = provider.getSigner();
-    const transactionContract = new ethers.Contract(contractAddress, contractABI, signer);
-
-    return transactionContract;
-}
 
 export const TransactionProvider = ({ children }) => {
     
@@ -43,19 +32,6 @@ export const TransactionProvider = ({ children }) => {
             throw new Error ('No ethereum object.')
         }
         
-    }
-
-    const DisconnectWallet = async () => {
-        try {
-            if(!ethereum) return alert("Първо инсталирайте Metamask!")
-
-            web3Modal.clearCachedProvider()
-
-            isConnected = true;
-        } catch (error) {
-            console.log(error)
-            throw new Error("No Ethereum object")
-        }
     }
 
     const connectWallet = async () => {
@@ -99,7 +75,7 @@ export const TransactionProvider = ({ children }) => {
     }, []);
     
     return(
-       <TransactionContext.Provider value = {{connectWallet, currentAccount, formData, setFormData, handleChange, sendTransaction, isConnected, DisconnectWallet}}>
+       <TransactionContext.Provider value = {{connectWallet, currentAccount, formData, setFormData, handleChange, sendTransaction, isConnected}}>
         { children }
        </TransactionContext.Provider>
     )
